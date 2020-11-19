@@ -3,7 +3,7 @@ const fs = require("fs");
 var path = require("path");
 
 var app = express();
-var PORT = 6060;
+var PORT = process.env.PORT || 3001;
 let tempID = 1
 
 app.use(express.static('../public'));
