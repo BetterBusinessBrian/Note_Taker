@@ -45,7 +45,7 @@ app.delete("/api/notes/:id", function (req, res) {
 
 
   }
-  fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(notes), (err) => { if (err) throw err });
+  fs.writeFileSync(path.join(__dirname, "/db/db.json"), JSON.stringify(notes), (err) => { if (err) throw err });
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 });
 
