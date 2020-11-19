@@ -6,19 +6,19 @@ var app = express();
 var PORT = process.env.PORT || 3001;
 let tempID = 1
 
-app.use(express.static('../public'));
+app.use(express.static('/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-let notes = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/db.json"), (err) => { if (err) throw err }));
+let notes = JSON.parse(fs.readFileSync(path.join(__dirname, "/db/db.json"), (err) => { if (err) throw err }));
 
 // HTML Routes
 app.get("/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "notes.html"));
+  res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 // API Routes
 app.get("/api/notes", function (req, res) {
@@ -30,8 +30,8 @@ app.post("/api/notes", function (req, res) {
   req.body.id = tempID;
   tempID++;
   notes.push(newNote);
-  fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(notes), (err) => { if (err) throw err });
-  res.sendFile(path.join(__dirname, "notes.html"))
+  fs.writeFileSync(path.join(__dirname, "/db/db.json"), JSON.stringify(notes), (err) => { if (err) throw err });
+  res.sendFile(path.join(__dirname, "public/notes.html"))
 });
 
 
@@ -46,7 +46,7 @@ app.delete("/api/notes/:id", function (req, res) {
 
   }
   fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(notes), (err) => { if (err) throw err });
-  res.sendFile(path.join(__dirname, "notes.html"))
+  res.sendFile(path.join(__dirname, "/public/notes.html"))
 });
 
 
